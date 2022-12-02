@@ -3,17 +3,34 @@ const person = {
 };
 
 export class Human {
+  gender = "Male";
+
+  printGender = () => {
+    console.log(this.gender);
+  };
+
+  // Pre-ES7 / legacy format
+  /* 
   constructor() {
     this.gender = "Male";
   }
-
+  */
+  /* 
   printGender() {
     console.log(this.gender);
   }
+  */
 }
 
 export class Person extends Human {
+  name = "Kris";
+  gender = "Male";
+
   call = () => {};
+
+  printMyName = () => {
+    console.log(this.name);
+  };
 
   /* 
   // No constructor, no object?
@@ -25,19 +42,11 @@ export class Person extends Human {
     // this.gender = super.gender;
   }
  */
-
-  name = "Kris";
-  gender = "Male";
-
   /* 
   printMyName() {
     console.log(this.name);
   }
  */
-
-  printMyName = () => {
-    console.log(this.name);
-  };
 }
 
 export default person;
