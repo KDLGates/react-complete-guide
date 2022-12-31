@@ -3,7 +3,7 @@ import Card from "../UI/Card";
 import ExpenseItemDate from "./ExpenseItemDate";
 import "./ExpenseItem.css";
 
-// takes title, amount, date
+// takes date, title, amount
 export default function ExpenseItem(props) {
   return (
     <Card className="expense-item">
