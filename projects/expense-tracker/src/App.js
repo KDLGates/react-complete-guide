@@ -34,6 +34,7 @@ function App() {
 
   const addExpenseHandler = (expense) => {
     // NB: React wants a function with the previous state for a clean diff.
+    // Recall the spread operator adds the new expense to the front of the previous array.
     setExpenses((prev) => [expense, ...prev]);
   };
 

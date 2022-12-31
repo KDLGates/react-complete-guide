@@ -20,6 +20,7 @@ export default function ExpenseList(props) {
   // Produce both a default and a populated list of expenses JSX.
   let expensesContent = <p>No expenses found for the selected year.</p>;
   if (filteredExpenses.length > 0) {
+    // Populate expensesContent as the list of ExpenseItems that match the filter year
     expensesContent = filteredExpenses.map((expense) => (
       <ExpenseItem
         key={expense.id}
@@ -38,6 +39,7 @@ export default function ExpenseList(props) {
           onFilterYearChange={setFilterYearHandler}
         />
         {/* Lean version! ref. (66.) of the course for interesting short-circuit ternary alternatives */}
+        {/* expensesContent is the list of ExpenseItems that match the filter year */}
         {expensesContent}
       </Card>
     </div>
