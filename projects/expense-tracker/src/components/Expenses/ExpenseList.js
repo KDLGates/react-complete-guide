@@ -5,38 +5,42 @@ import Card from "../UI/Card";
 import "./ExpenseList.css";
 
 export default function ExpenseList(props) {
-  const expenses = props.expenses;
-  const [ filterYear, setFilterYear ] = useState("2022");
+  const [filterYear, setFilterYear] = useState(new Date());
   const setFilterYearHandler = (year) => {
     console.log("In ExpenseList");
-    console.log(year);
+    console.log(`Filter Year updated to ${year}`);
     setFilterYear(year);
+  };
+
+  // Filter props.expenses down to the year matching the ExpensesFilter's
+  const filteredExpenses = props.expenses.filter(
+    (expense) => expense.date.getFullYear().toString() === filterYear
+  );
+
+  // Produce both a default and a populated list of expenses JSX.
+  let expensesContent = <p>No expenses found for the selected year.</p>;
+  if (filteredExpenses.length > 0) {
+    // Populate expensesContent as the list of ExpenseItems that match the filter year
+    expensesContent = filteredExpenses.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount}
+        date={expense.date}
+      />
+    ));
   }
 
   return (
     <div>
       <Card className="expenses">
-      <ExpensesFilter selectedYear={filterYear} onFilterYearChange={setFilterYearHandler} />
-        <ExpenseItem
-          title={expenses[0].title}
-          amount={expenses[0].amount}
-          date={expenses[0].date}
+        <ExpensesFilter
+          selectedYear={filterYear}
+          onFilterYearChange={setFilterYearHandler}
         />
-        <ExpenseItem
-          title={expenses[1].title}
-          amount={expenses[1].amount}
-          date={expenses[1].date}
-        />
-        <ExpenseItem
-          title={expenses[2].title}
-          amount={expenses[2].amount}
-          date={expenses[2].date}
-        />
-        <ExpenseItem
-          title={expenses[3].title}
-          amount={expenses[3].amount}
-          date={expenses[3].date}
-        />
+        {/* Lean version! ref. (66.) of the course for interesting short-circuit ternary alternatives */}
+        {/* expensesContent is the list of ExpenseItems that match the filter year */}
+        {expensesContent}
       </Card>
     </div>
   );

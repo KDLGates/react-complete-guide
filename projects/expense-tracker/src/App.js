@@ -1,39 +1,43 @@
+import React, { useState } from "react";
 import ExpenseList from "./components/Expenses/ExpenseList";
 import NewExpense from "./components/NewExpense/NewExpense";
 
+const initialExpenses = [
+  {
+    id: "e1",
+    title: "Car Insurance",
+    amount: 294.67,
+    date: new Date(2022, 2, 3),
+  },
+  {
+    id: "e2",
+    title: "Flood Insurance",
+    amount: 999.69,
+    date: new Date(Date.UTC(2022, 3, 2, 17)),
+  },
+  {
+    id: "e3",
+    title: "Electricity Bill",
+    amount: 123.45,
+    date: new Date(2020, 2, 4),
+  },
+  {
+    id: "e4",
+    title: "Internet Bill",
+    amount: 666.0,
+    date: new Date(2019, 2, 5),
+  },
+];
+
 function App() {
-  const expenses = [
-    {
-      id: "e1",
-      title: "Car Insurance",
-      amount: 294.67,
-      date: new Date(2022, 2, 3),
-    },
-    {
-      id: "e2",
-      title: "Flood Insurance",
-      amount: 999.69,
-      date: new Date(Date.UTC(2022, 3, 2, 17)),
-    },
-    {
-      id: "e3",
-      title: "Electricity Bill",
-      amount: 123.45,
-      date: new Date(2020, 2, 4),
-    },
-    {
-      id: "e4",
-      title: "Internet Bill",
-      amount: 666.0,
-      date: new Date(2019, 2, 5),
-    },
-  ];
+  const [expenses, setExpenses] = useState(initialExpenses);
 
   const addExpenseHandler = (expense) => {
-    // TODO: Update expenses array instead of logging
-    console.log("In App.js");
-    console.log(expense);
+    // NB: React wants a function with the previous state for a clean diff.
+    // Recall the spread operator adds the new expense to the front of the previous array.
+    setExpenses((prev) => [expense, ...prev]);
   };
+
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
