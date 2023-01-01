@@ -29,6 +29,7 @@ const initialExpenses = [
   },
 ];
 
+// React root for the Expense Tracker app.
 function App() {
   const [expenses, setExpenses] = useState(initialExpenses);
   
